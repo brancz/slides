@@ -1,0 +1,12 @@
+master: 10.0.2.2
+file_roots:
+  base:
+    - /srv/salt
+pillar_roots:
+  base:
+    - /srv/pillar
+grains:
+  roles:
+    - webserver
+mine_functions:
+  network.interfaces: []

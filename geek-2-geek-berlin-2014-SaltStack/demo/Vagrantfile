@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.define "minion1" do |minion_config|
+    minion_config.vm.network "private_network", ip: "192.168.0.101"
+    minion_config.vm.hostname = "minion1"
+    minion_config.vm.provision :salt do |salt|
+      salt.log_level = "info"
+      salt.minion_config = "saltstack/minion-loadbalancer"
+    end
+  end
+
+  config.vm.define "minion2" do |minion_config|
+    minion_config.vm.network "private_network", ip: "192.168.0.102"
+    minion_config.vm.hostname = "minion2"
+    minion_config.vm.provision :salt do |salt|
+      salt.log_level = "info"
+      salt.minion_config = "saltstack/minion-webserver"
+    end
+  end
+
+  config.vm.define "minion3" do |minion_config|
+    minion_config.vm.network "private_network", ip: "192.168.0.103"
+    minion_config.vm.hostname = "minion3"
+    minion_config.vm.provision :salt do |salt|
+      salt.log_level = "info"
+      salt.minion_config = "saltstack/minion-webserver"
+    end
+  end
+end
