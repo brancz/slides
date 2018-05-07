@@ -1,0 +1,1 @@
+kubectl exec -it $(kubectl get pod -lname=kube-rbac-proxy-client -ojsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}') -- /bin/sh
